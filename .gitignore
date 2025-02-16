@@ -12,3 +12,5 @@ _TraceOutput.bin
 .vscode/settings.json
 buildCmake/
 .cache/
+.idea/
+CMakeUserPresets.json
