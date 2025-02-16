@@ -1,0 +1,11 @@
+add_subdirectory(header)
+add_subdirectory(cwalk)
+add_subdirectory(enkiTS)
+add_subdirectory(events_parser)
+add_subdirectory(flat_hash_map)
+add_subdirectory(llvm_demangle)
+add_subdirectory(simdjson)
+add_subdirectory(sqlite3)
+add_subdirectory(xxHash)
+
+include_directories(external PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

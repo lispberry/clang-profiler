@@ -9,11 +9,11 @@
 #include "Arena.h"
 #include "Colors.h"
 #include "Utils.h"
-#include "external/cute_files.h"
-#include "external/flat_hash_map/bytell_hash_map.hpp"
-#include "external/llvm-Demangle/include/Demangle.h"
-#include "external/simdjson/simdjson.h"
-#include "external/xxHash/xxhash.h"
+#include <cute_files.h>
+#include <bytell_hash_map.hpp>
+#include <Demangle.h>
+#include <simdjson.h>
+#include <xxhash.h>
 #include <assert.h>
 #include <cinttypes>
 #include <iterator>

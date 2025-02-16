@@ -34,7 +34,7 @@ enum class BuildEventType
 
 struct DetailIndex
 {
-    int idx;
+    int idx{};
     explicit DetailIndex(int d = 0) : idx(d) {}
     bool operator==(DetailIndex rhs) const { return idx == rhs.idx; }
     bool operator!=(DetailIndex rhs) const { return idx != rhs.idx; }

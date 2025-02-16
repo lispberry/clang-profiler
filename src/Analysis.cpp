@@ -10,8 +10,7 @@ struct IUnknown; // workaround for old Win SDK header failures when using /permi
 #include "Arena.h"
 #include "Colors.h"
 #include "Utils.h"
-#include "external/flat_hash_map/bytell_hash_map.hpp"
-#include "external/inih/cpp/INIReader.h"
+#include <bytell_hash_map.hpp>
 #include <algorithm>
 #include <assert.h>
 #include <string>
@@ -79,7 +78,6 @@ struct Analysis
     void EndAnalysis();
 
     void FindExpensiveHeaders();
-    void ReadConfig();
 
     DetailIndex FindPath(EventIndex eventIndex) const;
 
@@ -91,7 +89,7 @@ struct Analysis
     struct FileEntry
     {
         DetailIndex file;
-        int64_t us;
+        int64_t us{};
     };
     struct IncludeChain
     {
@@ -563,28 +561,9 @@ void Analysis::FindExpensiveHeaders()
         expensiveHeaders.resize(config.headerCount);
 }
 
-void Analysis::ReadConfig()
-{
-    INIReader ini("ClangBuildAnalyzer.ini");
-
-    config.fileParseCount   = (int)ini.GetInteger("counts", "fileParse",    config.fileParseCount);
-    config.fileCodegenCount = (int)ini.GetInteger("counts", "fileCodegen",  config.fileCodegenCount);
-    config.functionCount    = (int)ini.GetInteger("counts", "function",     config.functionCount);
-    config.templateCount    = (int)ini.GetInteger("counts", "template",     config.templateCount);
-    config.headerCount      = (int)ini.GetInteger("counts", "header",       config.headerCount);
-    config.headerChainCount = (int)ini.GetInteger("counts", "headerChain",  config.headerChainCount);
-
-    config.minFileTime      = (int)ini.GetInteger("minTimes", "file",       config.minFileTime);
-
-    config.maxName          = (int)ini.GetInteger("misc", "maxNameLength",  config.maxName);
-    config.onlyRootHeaders  =      ini.GetBoolean("misc", "onlyRootHeaders",config.onlyRootHeaders);
-}
-
-
 void DoAnalysis(const BuildEvents& events, BuildNames& names, FILE* out)
 {
     Analysis a(events, names, out);
-    a.ReadConfig();
     for (int i = 0, n = (int)events.size(); i != n; ++i)
         a.ProcessEvent(EventIndex(i));
     a.EndAnalysis();

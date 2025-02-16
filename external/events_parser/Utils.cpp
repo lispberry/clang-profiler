@@ -1,8 +1,8 @@
 // Clang Build Analyzer https://github.com/aras-p/ClangBuildAnalyzer
 // SPDX-License-Identifier: Unlicense
-#include "Utils.h"
+#include <Utils.h>
 
-#include "external/cwalk/cwalk.h"
+#include <cwalk.h>
 #include <string.h>
 
 inline char ToLower(char c) { return (c >= 'A' && c <= 'Z') ? (c + 'a' - 'A') : c; }
