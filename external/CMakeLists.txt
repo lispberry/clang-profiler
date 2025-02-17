@@ -7,5 +7,7 @@ add_subdirectory(llvm_demangle)
 add_subdirectory(simdjson)
 add_subdirectory(sqlite3)
 add_subdirectory(xxHash)
+add_subdirectory(tree_sitter)
+add_subdirectory(tree_sitter_cpp)
 
 include_directories(external PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

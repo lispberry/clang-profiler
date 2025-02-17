@@ -2,12 +2,10 @@
 // SPDX-License-Identifier: Unlicense
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 #include <string_view>
 #include <vector>
-#include <utility>
-
 
 #ifdef _MSC_VER
 #define ftello64 _ftelli64

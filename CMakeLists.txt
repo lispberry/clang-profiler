@@ -5,26 +5,15 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(external)
 
-#add_library(external
-#    "external/cwalk/cwalk.c"
-#    "external/xxHash/xxhash.c"
-#    "external/enkiTS/TaskScheduler.cpp"
-#    "external/llvm_demangle/lib/Demangle.cpp"
-#    "external/llvm_demangle/lib/ItaniumDemangle.cpp"
-#    "external/llvm_demangle/lib/MicrosoftDemangle.cpp"
-#    "external/llvm_demangle/lib/MicrosoftDemangleNodes.cpp"
-#    "external/simdjson/simdjson.cpp"
-#    "external/sqlite3/sqlite3.c")
-#target_include_directories(external PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-
 set(SRC
+    "src/Sql.cpp"
+    "src/Sql.h"
     "src/Analysis.cpp"
-    "external/events_parser/Colors.cpp"
     "src/main.cpp"
-    "external/events_parser/Utils.cpp"
 )
 add_executable(${CMAKE_PROJECT_NAME} "${SRC}")
-target_link_libraries(${CMAKE_PROJECT_NAME} events_parser)
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC src)
+target_link_libraries(${CMAKE_PROJECT_NAME} events_parser sqlite3 tree-sitter tree-sitter-cpp)
 
 find_package(Threads REQUIRED)
 target_link_libraries(${CMAKE_PROJECT_NAME} Threads::Threads)
